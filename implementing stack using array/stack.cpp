@@ -70,8 +70,7 @@ int main()
     {
         cout << "type --1-- Push in stack" << endl;
         cout << "type --2-- Pop from stack" << endl;
-        // cout << "3) Display stack" << endl;
-        // cout << "4) Exit" << endl;
+        cout << "type --3-- Exit" << endl;
         cout << endl;
 
         cout << "enter your number" << endl;
@@ -88,6 +87,10 @@ int main()
 
             st.pop();
             cout << "current element present on top is - " << st.peek() << endl;
+            break;
+
+        case 3:
+            return 0;
             break;
         }
     } while (number == 1 || number == 2);
