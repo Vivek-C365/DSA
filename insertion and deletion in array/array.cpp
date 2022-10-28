@@ -9,6 +9,7 @@ int main()
     cin >> maxarray;
 
     cout<<endl;
+    cout<<endl;
 
 
     int array[maxarray], i, number, position, total, delpos;
