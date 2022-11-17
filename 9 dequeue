@@ -1,0 +1,130 @@
+#include<iostream>
+using namespace std;
+#define SIZE 5
+class dequeue {
+   int a[20],f,r;
+   public:
+      dequeue();
+      void insert_front(int);
+      void insert_rear(int);
+      void delete_front();
+      void delete_rear();
+      void show();
+};
+dequeue::dequeue() {
+   f=-1;
+   r=-1;
+}
+void dequeue::show(){
+    if(f==-1){
+        cout<<"queue is empty"<<endl;
+    }
+    else{
+        for(int i=f; i<=r; i++){
+            cout<<a[i]<<endl;
+        }
+    }
+}
+void dequeue::insert_front(int i) {
+   if(f==-1) {
+      f=0;
+      a[++r]=i;
+      
+   } else if(f!=0) {
+      a[--f]=i;
+      
+   } else {
+      cout<<"overflow from front";
+   }
+}
+void dequeue::insert_rear(int i) {
+   if(r>=SIZE-1) {
+      cout<<"overflow from rear";
+   } else {
+     
+      if(f==-1) {
+         f++;
+         r++;
+      } else {
+         r=r+1;
+      }
+      a[r]=i;
+   }
+}
+
+void dequeue::delete_front() {
+   if(f==-1) {
+      cout<<"dequeue is empty"<<endl;
+      return;
+   }
+   else {
+     cout<<"deleted number from front is"<<a[f]<<endl;
+      if(f==r) {
+         f=r=-1;
+         return;
+      } else
+         f=f+1;
+      }
+   }
+   void dequeue::delete_rear() {
+      if(f==-1) {
+         cout<<"dequeue is empty"<<endl;
+         return;
+      }
+      else {
+        cout<<"deleted number from rear  is"<<a[r]<<endl;
+         if(f==r) {
+            f=r=-1;
+         } else{
+            r=r-1;
+      }
+   }
+}
+   
+   int main() 
+   {
+      int c,i;
+      dequeue d;
+      do{
+      cout<<"1.insert at beginning"<<endl;
+      cout<<"2.insert at end"<<endl;
+      cout<<"3.deletion from front"<<endl;
+      cout<<"4.deletion from rear"<<endl;
+      cout<< "5 show numbers" <<endl;
+      cout<<"6.exit"<<endl;
+      
+      
+      cout<<"enter number you want to perform action"<<endl;
+      cin>>c;
+      
+      
+      
+      switch(c) {
+         case 1:
+            cout<<"enter number in queue from front"<<endl;
+            cin>>i;
+            d.insert_front(i);
+         break;
+         case 2:
+            cout<<"enter number in queue from rear"<<endl;
+            cin>>i;
+            d.insert_rear(i);
+         break;
+         case 3:
+          d.delete_front();
+         break;
+         case 4:
+            d.delete_rear();
+         break;
+         case 5:
+         d.show();
+         break;
+         case 6:
+            exit(1);
+         break;
+         
+      }
+         
+       }while(c!='6');
+      }
+    
