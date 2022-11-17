@@ -1,82 +1,84 @@
 #include<iostream>
 using namespace std;
+//pre-defined size
 #define SIZE 5
-class dequeue {
-   int a[20],f,r;
+class doublequeue {
+   int array[20],front,rear;
    public:
-      dequeue();
-      void insert_front(int);
-      void insert_rear(int);
-      void delete_front();
-      void delete_rear();
-      void show();
+      doublequeue();
+      void front_insert(int);
+      void front_delete();
+      void rear_insert(int);
+      void rear_delete();
+      void show_list();
 };
-dequeue::dequeue() {
-   f=-1;
-   r=-1;
+doublequeue::doublequeue() {
+    //predefined numbers front and rear
+   front=-1;
+   rear=-1;
 }
-void dequeue::show(){
-    if(f==-1){
+void doublequeue::show_list(){
+    if(front==-1){
         cout<<"queue is empty"<<endl;
     }
     else{
-        for(int i=f; i<=r; i++){
-            cout<<a[i]<<endl;
+        for(int i=front; i<=rear; i++){
+            cout<<array[i]<<endl;
         }
     }
 }
-void dequeue::insert_front(int i) {
-   if(f==-1) {
-      f=0;
-      a[++r]=i;
+void doublequeue::front_insert(int i) {
+   if(front==-1) {
+      front=0;
+      array[++rear]=i;
       
-   } else if(f!=0) {
-      a[--f]=i;
+   } else if(front!=0) {
+      array[--front]=i;
       
    } else {
       cout<<"overflow from front";
    }
 }
-void dequeue::insert_rear(int i) {
-   if(r>=SIZE-1) {
+void doublequeue::rear_insert(int i) {
+   if(rear>=SIZE-1) {
       cout<<"overflow from rear";
    } else {
      
-      if(f==-1) {
-         f++;
-         r++;
+      if(front==-1) {
+         front++;
+         rear++;
       } else {
-         r=r+1;
+         rear=rear+1;
       }
-      a[r]=i;
+      array[rear]=i;
    }
 }
 
-void dequeue::delete_front() {
-   if(f==-1) {
-      cout<<"dequeue is empty"<<endl;
+void doublequeue::front_delete() {
+   if(front==-1) {
+      cout<<"doublequeue is empty"<<endl;
       return;
    }
    else {
-     cout<<"deleted number from front is"<<a[f]<<endl;
-      if(f==r) {
-         f=r=-1;
+     cout<<"deleted number from front is"<<array[front]<<endl;
+      if(front==rear) {
+         front=rear=-1;
          return;
       } else
-         f=f+1;
+         front=front+1;
       }
    }
-   void dequeue::delete_rear() {
-      if(f==-1) {
-         cout<<"dequeue is empty"<<endl;
+   void doublequeue::rear_delete() {
+      if(front==-1) {
+         cout<<"doublequeue is empty"<<endl;
          return;
       }
       else {
-        cout<<"deleted number from rear  is"<<a[r]<<endl;
-         if(f==r) {
-            f=r=-1;
+        cout<<"deleted number from rear  is"<<array[rear]<<endl;
+         if(front==rear) {
+            front=rear=-1;
          } else{
-            r=r-1;
+            rear=rear-1;
       }
    }
 }
@@ -84,43 +86,43 @@ void dequeue::delete_front() {
    int main() 
    {
       int c,i;
-      dequeue d;
+      doublequeue d;
       do{
-      cout<<"1.insert at beginning"<<endl;
-      cout<<"2.insert at end"<<endl;
-      cout<<"3.deletion from front"<<endl;
-      cout<<"4.deletion from rear"<<endl;
-      cout<< "5 show numbers" <<endl;
-      cout<<"6.exit"<<endl;
+      cout<<"type --1-- insert at front"<<endl;
+      cout<<"type --2-- insert at rear"<<endl;
+      cout<<"type --3-- delete at front"<<endl;
+      cout<<"type --4-- delete at rear"<<endl;
+      cout<<"type --5-- show numbers" <<endl;
+      cout<<"type --6-- exit"<<endl;
       
       
-      cout<<"enter number you want to perform action"<<endl;
+      cout<<"enter number to run task"<<endl;
       cin>>c;
       
       
       
       switch(c) {
          case 1:
-            cout<<"enter number in queue from front"<<endl;
+            cout<<"enter value to insert at front"<<endl;
             cin>>i;
-            d.insert_front(i);
+            d.front_insert(i);
          break;
          case 2:
-            cout<<"enter number in queue from rear"<<endl;
+            cout<<"enter value to insert at rear"<<endl;
             cin>>i;
-            d.insert_rear(i);
+            d.rear_insert(i);
          break;
          case 3:
-          d.delete_front();
+          d.front_delete();
          break;
          case 4:
-            d.delete_rear();
+            d.rear_delete();
          break;
          case 5:
-         d.show();
+         d.show_list();
          break;
          case 6:
-            exit(1);
+            return 0;
          break;
          
       }
