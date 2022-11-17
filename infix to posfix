@@ -1,0 +1,84 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+using namespace std;
+
+class Stack{
+    public:
+    int pre(char oper){
+        if(oper == '^'){
+            return 3;
+        }
+        else if(oper == '*' || oper == '/'){
+            return 2;
+        }
+        else if(oper == '+' || oper =='-'){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
+    
+    void intoposfix(string s){
+        stack<char> st;
+        
+        // string result is used show and store the output
+        string result;
+        
+        
+        for(int i=0; i<s.length(); i++){
+            
+            //value of i store in char c
+            char c = s[i];
+            
+            //condition is applied 
+            if((c>='a'&& c<='z') || (c>='A' && c<='Z') ){
+                
+                //if condition is true then add result and c value and store in result
+                result = result+c;
+            }
+            
+            // condition is used is this bracket is found then push into stack
+            else if( c== '('){
+                st.push('(');
+            }
+            
+            // condition  is used if this bracket is found then pop this bracket till opening bracket is found
+            else if (c== ')'){
+                while(st.top()=='('){
+                    result = result+st.top();
+                }
+                st.pop();
+            }
+            else{
+                
+                // this condition is used for checking value is that us greater or not and checking that stack is empty or not
+                while(!st.empty() && pre(s[i])<=pre(st.top())){
+                    result = result + st.top();
+                    st.pop();
+                }
+                st.push(c);
+            }
+        }
+        while(!st.empty()){
+            result = result + st.top();
+            st.pop();
+        }
+        cout<<result<<endl;
+    }
+    
+    
+    
+    
+};
+
+int main(){
+    cout<<"running"<<endl;
+    Stack obj;
+    string exp;
+    cout<<"enter";
+    cin>>exp;
+    obj.intoposfix(exp);
+}
