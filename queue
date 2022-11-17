@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+
+//Compiler version g++ 6.3.0
+
+
+
+int queue[100], front = - 1, rear = - 1,maxqueue;
+void Insert() {
+  
+  
+   int val;
+    
+    //checking the condition that qeue is full or not
+   if (rear == maxqueue- 1)
+   cout<<"Queue Overflow"<<endl;
+   else {
+      if (front == - 1)
+          
+      //if qeue is not full then we make front = 0
+      front = 0;
+      cout<<"Insert the element in queue : "<<endl;
+      cin>>val;
+      rear++;
+      queue[rear] = val;
+   }
+}
+void Delete() {
+   if (front == - 1 || front > rear) {
+      cout<<"Queue Underflow "<<endl;
+      return ;
+   } else {
+      cout<<"Element currently remove  from queue at front : "<< queue[front] <<endl;
+      front++;
+      cout<<"Elelment currenty present at front is "<< queue[front]<<endl;
+   }
+}
+void Showelem() {
+   if (front == - 1)
+   cout<<"Queue is empty"<<endl;
+   else {
+      cout<<"Queue elements are : ";
+      for (int i = front; i <= rear; i++)
+      cout<<queue[i]<<" ";
+         cout<<endl;
+   }
+}
+
+
+
+int main()
+{
+    cout<<"enter size of queue";
+  cin>>maxqueue;
+  int ch;
+   cout<<"type --1-- Insert number in queue"<<endl;
+   cout<<"type --2-- Delete numbet from queue"<<endl;
+    cout<<"type --3-- Display elements in queue"<<endl;
+   cout<<"type --4-- EXIT"<<endl;
+   do {
+      cout<<"Enter your choice : "<<endl;
+      cin>>ch;
+      switch (ch) {
+         case 1: Insert();
+         break;
+         case 2: Delete();
+         break;
+          case 3: Showelem();
+        break;
+         case 4: cout<<"Exit"<<endl;
+         break;
+        
+      }
+   } while(ch!=4);
+   return 0;
+}
