@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+
+class cqueue{
+    int front;
+    int rear;
+    int arr[5];
+    
+    public:
+    
+   cqueue(){
+        front = -1;
+        rear = -1;
+        
+        for(int i=0; i<5; i++){
+            arr[i]=0;
+        }
+    }
+    
+    
+    void enqueue(int val){
+        if(rear == 4){
+            cout<<"overflow"<<endl;
+            return;
+        }
+        else if(front == -1 && rear ==-1){
+            rear = 0;
+            front = 0;
+            arr[rear] = val;
+        }
+        else{
+            rear = (rear+1)%5;
+            arr[rear]=val;
+        }
+    }
+    
+    int dequeue(){
+        int x= 0;
+        if(front == -1 && rear ==-1){
+            cout<<"underflow"<<endl;
+            return x;
+        }
+        else if(rear==front){
+            arr[rear]= 0;
+            rear = -1;
+            front = -1;
+            return x;
+        }
+        else{
+            cout<<"current value at front"<<front<<endl;
+            x=arr[front];
+            arr[front]=0;
+            front = (front+1)%5;
+            return x;
+        }
+    }
+    
+    
+    
+    void display(){
+        for(int i =0; i<5; i++){
+            cout<<arr[i]<<endl;
+        }
+    }
+};
+
+int main(){
+    int value;
+    int cases;
+    cqueue cq;
+    
+    do{
+        cout<<"type --1-- for enqueue"<<endl;
+        cout<<"type --2-- for dequeue"<<endl;
+        cout<<"type --3-- for display"<<endl;
+        cout<<"type --4-- for exit"<<endl;
+        
+        cin>>cases;
+        
+        switch(cases)
+        {
+            case 1:
+            cout<<"enter value to enqueue in queue"<<endl;
+            cin>>value;
+            cq.enqueue(value);
+            break;
+            
+            case 2:
+            cq.dequeue();
+            break;
+            
+            case 3:
+            cout<<"value present in queue"<<endl;
+            cq.display();
+            break;
+            
+            case 4:
+            return 0;
+            break;
+        }
+    }while(cases!= 4);
+    return 0;
+}
